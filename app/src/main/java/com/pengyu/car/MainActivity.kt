@@ -1,7 +1,7 @@
 package com.pengyu.car
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         goods_xprice = findViewById(R.id.goods_xprice) as TextView
-        car_recy.layoutManager = LinearLayoutManager(this)
+        car_recy.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         createSJ = CreateData.createSJ()
         bar_title.text = resources.getString(R.string.gwc)
 

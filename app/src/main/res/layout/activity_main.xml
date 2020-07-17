@@ -9,7 +9,7 @@
 
     <include layout="@layout/toolbarc" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/car_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +26,7 @@
         android:background="@drawable/car_bottom"
         android:gravity="center_vertical">
 
-        <android.support.v7.widget.AppCompatCheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/check_goods_all"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
