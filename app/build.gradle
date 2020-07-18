@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.pengyu.car"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -29,10 +29,10 @@ dependencies {
     compile 'androidx.appcompat:appcompat:1.0.0'
     compile 'androidx.constraintlayout:constraintlayout:1.1.3'
     testCompile 'junit:junit:4.12'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
-    compile 'androidx.recyclerview:recyclerview:1.0.0'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.32'
+    compile 'androidx.recyclerview:recyclerview:1.1.0'
     compile 'com.kyleduo.switchbutton:library:1.4.6'
-    compile 'com.github.bumptech.glide:glide:4.0.0'                     //glide 图片框架
+    compile 'com.github.bumptech.glide:glide:4.11.0'                     //glide 图片框架
     compile 'com.github.lygttpod:SuperTextView:2.1.3'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile 'ren.qinc.numberbutton:numberbutton:0.0.1'

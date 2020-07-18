@@ -15,7 +15,7 @@ import com.kyleduo.switchbutton.SwitchButton
  * Created by PengYu on 2017/10/18.
  */
 
-class CarAdapter(private val data: ArrayList<MultiItemEntity>, private val selectChangeListener: SelectChangeListener) : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder>(data) {
+class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeListener: SelectChangeListener) : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder>(data) {
 
     private var isDEL = false                   //是否为删除状态
     private var clickItem: ClickItem? = null    //保存被选中的Item
