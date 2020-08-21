@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="20dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,7 +17,7 @@
         android:paddingRight="10dp">
 
         <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/check_goods"
+            android:id="@+id/check_sj"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:button="@drawable/checkbox_state"

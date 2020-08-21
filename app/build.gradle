@@ -37,6 +37,8 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile 'ren.qinc.numberbutton:numberbutton:0.0.1'
     compile 'com.gyf.barlibrary:barlibrary:2.3.0'
+    implementation
+
 }
 repositories {
     mavenCentral()

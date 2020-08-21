@@ -35,6 +35,7 @@ class MainActivity : BaseActivity() {
         createSJ = CreateData.createSJ()
         bar_title.text = resources.getString(R.string.gwc)
 
+        //  selectChangeListener 中发生变化时，回调商品
         carAdapter = CarAdapter(createSJ!!, object : SelectChangeListener {
             override fun goodsChangeS(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean) {
                 check_goods_all.isChecked = checkAllSJs

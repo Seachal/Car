@@ -38,14 +38,14 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
             TYPE_LEVEL_0 -> {   //商家Item
                 val carEntity = item as CarEntity
                 helper.setText(R.id.sj_name, carEntity.name)
-                helper.setChecked(R.id.check_goods, carEntity.isChecked)
-                val check_good_sj = helper.getView<CheckBox>(R.id.check_goods)
+                helper.setChecked(R.id.check_sj, carEntity.isChecked)
+                val check_sj = helper.getView<CheckBox>(R.id.check_sj)
                 if (!isDEL) {
-                    check_good_sj.isChecked = carEntity.isChecked
+                    check_sj.isChecked = carEntity.isChecked
                 } else {
-                    check_good_sj.isChecked = carEntity.isDelChecked
+                    check_sj.isChecked = carEntity.isDelChecked
                 }
-                checkSJITem(carEntity, check_good_sj)
+                checkSJITem(carEntity, check_sj)
                 helper.itemView.setOnClickListener {
                     if (clickItem != null) {
                         clickItem!!.clickSJItem(helper.adapterPosition, carEntity)
@@ -159,10 +159,10 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
      * 点击商家的item给商家状态赋值，并给商家的商品赋值
      *
      * @param carEntity     单个商家
-     * @param check_good_sj 商家checkbox
+     * @param check_sj 商家checkbox
      */
-    private fun checkSJITem(carEntity: CarEntity, check_good_sj: CheckBox) {
-        check_good_sj.setOnCheckedChangeListener { compoundButton, isChecked ->
+    private fun checkSJITem(carEntity: CarEntity, check_sj: CheckBox) {
+        check_sj.setOnCheckedChangeListener { compoundButton, isChecked ->
             compoundButton.setOnClickListener {
                 if (!isDEL) {
                     carEntity.isChecked = isChecked
@@ -184,7 +184,7 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
     }
 
     /**
-     * 点击商品的iteem给商品的状态赋值
+     * 点击商品的item给商品的状态赋值
      *
      * @param goods       单个商品
      * @param check_goods 商品checkbox
@@ -211,11 +211,12 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
     }
 
     /**
-     * 判断是否全选商品
+     * 判断是否全选商品 ，（sca: 如果商品全选中了，商家也会跟着选中）
      */
     private fun isCheckAllGoods(orgid: Long) {
         for (datum in data) {
             if (datum is CarEntity) {
+//                找到商家 id
                 if (orgid == datum.orgid) {
                     for (good in datum.subItems) {
                         if (!isDEL) {

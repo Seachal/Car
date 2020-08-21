@@ -11,12 +11,16 @@ import java.util.ArrayList
 object CreateData {
 
 
+    /**
+     * 商家信息
+     */
     fun createSJ(): ArrayList<MultiItemEntity> {
         val res = ArrayList<MultiItemEntity>()
         val carEntity0 = CarEntity()
         for (goods in createSJGoods0()) {
             carEntity0.addSubItem(goods)
         }
+//        商家名 等信息
         carEntity0.yh = createSJYH()[0]
         carEntity0.name = "湖南刀削面"
         carEntity0.orgid = 0
@@ -43,6 +47,9 @@ object CreateData {
         return res
     }
 
+    /**
+     * 商品 列表数据
+     */
     fun createSJGoods0(): List<CarEntity.Goods> {
         val goods = ArrayList<CarEntity.Goods>()
         val good0 = CarEntity.Goods()
@@ -126,6 +133,9 @@ object CreateData {
         return goods
     }
 
+    /**
+     * 商品信息 1
+     */
     fun createSJGoods1(): List<CarEntity.Goods> {
         val goods = ArrayList<CarEntity.Goods>()
         val good0 = CarEntity.Goods()
@@ -170,6 +180,9 @@ object CreateData {
         return goods
     }
 
+    /**
+     * 商品信息 2
+     */
     fun createSJGoods2(): List<CarEntity.Goods> {
         val goods = ArrayList<CarEntity.Goods>()
         val good0 = CarEntity.Goods()

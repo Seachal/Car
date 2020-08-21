@@ -5,6 +5,8 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 
 /**
  * Created by PengYu on 2017/10/18.
+ *
+ * 借助  BRVAH AbstractExpandableItem 实现
  */
 
 class CarEntity : AbstractExpandableItem<CarEntity.Goods>(), MultiItemEntity {
