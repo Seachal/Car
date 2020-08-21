@@ -1,7 +1,7 @@
 package com.pengyu.car
 
-import com.chad.library.adapter.base.entity.AbstractExpandableItem
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.chad.library.adapter.base.entity.SectionEntity
 
 /**
  * Created by PengYu on 2017/10/18.
@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
  * 借助  BRVAH AbstractExpandableItem 实现
  */
 
-class CarEntity : AbstractExpandableItem<CarEntity.Goods>(), MultiItemEntity {
+class CarEntity : SectionEntity<CarEntity.Goods>(), MultiItemEntity {
     var name: String? = null                //商家名称
     var orgid: Long = 0                 //商家ID
     var yh: YH? = null                       //商家的商品优惠
