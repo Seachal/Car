@@ -30,7 +30,7 @@ class CarEntity(override var childNode: MutableList<BaseNode>?) : BaseExpandNode
         var yhaway: Int = 0             //优惠的方式（满减==0（满减需要商品的总额-满送金额）、满送==1（满送不用管）、瞒包=2满多少包邮（不需要支付邮费））
     }
 
-    class Goods() : BaseNode {
+    class Goods() : BaseNode() {
         var orgid: Long = 0             //商家ID
         var goodsid: Long = 0           //商品ID
         var goodsname: String? = null       //商品名称

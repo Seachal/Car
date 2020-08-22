@@ -5,9 +5,11 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatCheckBox
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.chad.library.adapter.base.BaseNodeAdapter
+import com.chad.library.adapter.base.entity.node.BaseNode
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kyleduo.switchbutton.SwitchButton
 
@@ -15,9 +17,11 @@ import com.kyleduo.switchbutton.SwitchButton
  * Created by PengYu on 2017/10/18.
  */
 
-class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeListener: SelectChangeListener) : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder>(data) {
+class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: SelectChangeListener) : BaseNodeAdapter(data) {
 
     private var isDEL = false                   //是否为删除状态
+
+    //  监听器
     private var clickItem: ClickItem? = null    //保存被选中的Item
 
     /**
@@ -33,12 +37,13 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
         addItemType(TYPE_LEVEL_1, R.layout.item_car_goods)  //商品布局ID
     }
 
-    override fun convert(helper: BaseViewHolder, item: MultiItemEntity) {
+    override fun convert(helper: BaseViewHolder, item: BaseNode) {
         when (helper.itemViewType) {
             TYPE_LEVEL_0 -> {   //商家Item
                 val carEntity = item as CarEntity
                 helper.setText(R.id.sj_name, carEntity.name)
-                helper.setChecked(R.id.check_sj, carEntity.isChecked)
+//               取消了 setchecked 方法
+                (helper.getView<AppCompatCheckBox>(R.id.check_sj)).setChecked(carEntity.isChecked)
                 val check_sj = helper.getView<CheckBox>(R.id.check_sj)
                 if (!isDEL) {
                     check_sj.isChecked = carEntity.isChecked
@@ -55,8 +60,8 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
                 switch_button.setOnCheckedChangeListener { buttonView, isChecked ->
                     buttonView.setOnClickListener {
                         carEntity.isBjchecked = isChecked
-                        for (subItem in carEntity.subItems) {
-                            subItem.isBjchecked = isChecked
+                        for (subItem in carEntity.childNode!!) {
+                            (subItem as CarEntity.Goods).isChecked = isChecked
                         }
                         notifyDataSetChanged()
                     }
@@ -68,7 +73,7 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
                 val goods_img = helper.getView<ImageView>(R.id.goods_img)
                 var goods_count = helper.getView<TextView>(R.id.goods_count)
                 goods_count.text = "x${goods.goodscoun}"
-                Glide.with(mContext).load(goods.urls).into(goods_img)
+                Glide.with(context).load(goods.urls).into(goods_img)
                 helper.setText(R.id.goods_name, goods.goodsname)
                         .setText(R.id.goods_remake, goods.goodsremake)
                         .setText(R.id.goods_xprice, goods.goodsxprice.toString() + "")
@@ -100,7 +105,7 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
                 number_button.setBuyMax(10)
                         .setInventory(1000)
                         .setCurrentNumber(goods.goodscoun)
-                number_button.setOnChangeListener(object :MyNumberButton.ChangeListener{
+                number_button.setOnChangeListener(object : MyNumberButton.ChangeListener {
                     override fun change() {
                         goods.goodscoun = number_button.number
                         goods_count.text = "x${goods.goodscoun}"
@@ -170,11 +175,11 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
                     carEntity.isDelChecked = isChecked
                 }
 
-                for (good in carEntity.subItems) {
+                for (good in carEntity.childNode!!) {
                     if (!isDEL) {
-                        good.isChecked = isChecked
+                        (good as CarEntity.Goods).isChecked = isChecked
                     } else {
-                        good.isDelChecked = isChecked
+                        (good as CarEntity.Goods).isDelChecked = isChecked
                     }
                 }
                 notifyDataSetChanged()
@@ -218,13 +223,13 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
             if (datum is CarEntity) {
 //                找到商家 id
                 if (orgid == datum.orgid) {
-                    for (good in datum.subItems) {
+                    for (good in datum.childNode!!) {
                         if (!isDEL) {
-                            if (!good.isChecked) {
+                            if (!(good as CarEntity.Goods).isChecked) {
                                 return
                             }
                         } else {
-                            if (!good.isDelChecked) {
+                            if (!(good as CarEntity.Goods).isDelChecked) {
                                 return
                             }
                         }
@@ -246,14 +251,14 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
     private fun isNOCheckAllGoods(orgid: Long) {
         for (datum in data) if (datum is CarEntity) {
             if (orgid == datum.orgid) {
-                for (good in datum.subItems) {
+                for (good in datum.childNode!!) {
                     if (!isDEL) {
-                        if (!good.isChecked) {
+                        if (!(good as CarEntity.Goods).isChecked) {
                             datum.isChecked = false
                             return
                         }
                     } else {
-                        if (!good.isDelChecked) {
+                        if (!(good as CarEntity.Goods).isDelChecked) {
                             datum.isDelChecked = false
                             return
                         }
@@ -299,11 +304,11 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
                 .forEach {
                     if (it.isDelChecked) {
                         data.remove(it)
-                        for (subItem in it.subItems) {
+                        for (subItem in it.childNode!!) {
                             data.remove(subItem)
                         }
                     } else {
-                        it.subItems.filter { it.isDelChecked }.forEach { data.remove(it) }
+                        it.childNode?.filter { (it as CarEntity.Goods).isDelChecked }?.forEach { data.remove(it) }
                     }
                 }
         notifyDataSetChanged()
@@ -317,14 +322,14 @@ class  CarAdapter ( data: ArrayList<MultiItemEntity>, private val selectChangeLi
         fun clickSJItem(position: Int, carEntity: CarEntity)
         fun clickGoodsItem(position: Int, goods: CarEntity.Goods)
     }
-
-
     /**
      *  设置点击事件
      */
     fun setOnClickListener(clickItem: ClickItem) {
         this.clickItem = clickItem
     }
+
+
 
     /**
      * @del 赋值isDEL 并且更新itm状态 返回选中的Item
