@@ -1,6 +1,8 @@
 package com.pengyu.car
 
+import android.provider.DocumentsContract
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.chad.library.adapter.base.entity.node.BaseNode
 
 import java.util.ArrayList
 
@@ -14,29 +16,26 @@ object CreateData {
     /**
      * 商家信息
      */
-    fun createSJ(): ArrayList<MultiItemEntity> {
-        val res = ArrayList<MultiItemEntity>()
-        val carEntity0 = CarEntity()
-        for (goods in createSJGoods0()) {
-            carEntity0.addSubItem(goods)
-        }
+    fun createSJ(): ArrayList<BaseNode> {
+        val res = ArrayList<BaseNode>()
+        val carEntity0 = CarEntity(createSJGoods0())
 //        商家名 等信息
         carEntity0.yh = createSJYH()[0]
         carEntity0.name = "湖南刀削面"
         carEntity0.orgid = 0
 
-        val carEntity1 = CarEntity()
-        for (goods in createSJGoods1()) {
-            carEntity1.addSubItem(goods)
-        }
+        val carEntity1 = CarEntity(createSJGoods1())
+//        for (goods in createSJGoods1()) {
+////            carEntity1.addSubItem(goods)
+////        }
         carEntity1.yh = createSJYH()[1]
         carEntity1.name = "山西肠旺面"
         carEntity1.orgid = 1
 
-        val carEntity2 = CarEntity()
-        for (goods in createSJGoods2()) {
-            carEntity2.addSubItem(goods)
-        }
+        val carEntity2 = CarEntity(createSJGoods2())
+//        for (goods in createSJGoods2()) {
+//            carEntity2.addSubItem(goods)
+//        }
         carEntity2.yh = createSJYH()[2]
         carEntity2.name = "遵义虾子牛肉粉"
         carEntity2.orgid = 2
@@ -50,8 +49,8 @@ object CreateData {
     /**
      * 商品 列表数据
      */
-    fun createSJGoods0(): List<CarEntity.Goods> {
-        val goods = ArrayList<CarEntity.Goods>()
+    fun createSJGoods0(): MutableList<BaseNode> {
+        val goods = ArrayList<BaseNode>()
         val good0 = CarEntity.Goods()
         good0.orgid = 0
         good0.goodsid = 0
@@ -136,8 +135,8 @@ object CreateData {
     /**
      * 商品信息 1
      */
-    fun createSJGoods1(): List<CarEntity.Goods> {
-        val goods = ArrayList<CarEntity.Goods>()
+    fun createSJGoods1(): MutableList<BaseNode> {
+        val goods = ArrayList<BaseNode>()
         val good0 = CarEntity.Goods()
         good0.orgid = 1
         good0.goodsid = 0
@@ -183,8 +182,8 @@ object CreateData {
     /**
      * 商品信息 2
      */
-    fun createSJGoods2(): List<CarEntity.Goods> {
-        val goods = ArrayList<CarEntity.Goods>()
+    fun createSJGoods2(): MutableList<BaseNode> {
+        val goods = ArrayList<BaseNode>()
         val good0 = CarEntity.Goods()
         good0.orgid = 2
         good0.goodsid = 0

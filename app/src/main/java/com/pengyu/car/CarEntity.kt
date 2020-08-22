@@ -1,7 +1,8 @@
 package com.pengyu.car
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
-import com.chad.library.adapter.base.entity.SectionEntity
+import com.chad.library.adapter.base.entity.node.BaseExpandNode
+import com.chad.library.adapter.base.entity.node.BaseNode
 
 /**
  * Created by PengYu on 2017/10/18.
@@ -9,7 +10,7 @@ import com.chad.library.adapter.base.entity.SectionEntity
  * 借助  BRVAH AbstractExpandableItem 实现
  */
 
-class CarEntity : SectionEntity<CarEntity.Goods>(), MultiItemEntity {
+class CarEntity(override var childNode: MutableList<BaseNode>?) : BaseExpandNode() {
     var name: String? = null                //商家名称
     var orgid: Long = 0                 //商家ID
     var yh: YH? = null                       //商家的商品优惠
@@ -20,13 +21,6 @@ class CarEntity : SectionEntity<CarEntity.Goods>(), MultiItemEntity {
 
     var isSjchecked: Boolean = false
 
-    override fun getLevel(): Int {
-        return 0
-    }
-
-    override fun getItemType(): Int {
-        return CarAdapter.TYPE_LEVEL_0
-    }
 
     class YH {
         var yhid: Long = 0              //优惠ID
@@ -36,7 +30,7 @@ class CarEntity : SectionEntity<CarEntity.Goods>(), MultiItemEntity {
         var yhaway: Int = 0             //优惠的方式（满减==0（满减需要商品的总额-满送金额）、满送==1（满送不用管）、瞒包=2满多少包邮（不需要支付邮费））
     }
 
-    class Goods : MultiItemEntity {
+    class Goods() : BaseNode {
         var orgid: Long = 0             //商家ID
         var goodsid: Long = 0           //商品ID
         var goodsname: String? = null       //商品名称
@@ -50,9 +44,8 @@ class CarEntity : SectionEntity<CarEntity.Goods>(), MultiItemEntity {
         var isChecked: Boolean = false
         var isBjchecked: Boolean = false
         var isDelChecked: Boolean = false
+        override val childNode: MutableList<BaseNode>?
+            get() = null
 
-        override fun getItemType(): Int {
-            return CarAdapter.TYPE_LEVEL_1
-        }
     }
 }

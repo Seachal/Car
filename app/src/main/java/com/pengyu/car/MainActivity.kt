@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.chad.library.adapter.base.entity.node.BaseNode
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbarc.*
 
@@ -20,7 +21,7 @@ class MainActivity : BaseActivity() {
     private var goods_xprice: TextView? = null
     private var checkItems: ArrayList<CarEntity.Goods> = ArrayList()
     private var delCheckItems: ArrayList<CarEntity.Goods> = ArrayList()
-    private var createSJ: ArrayList<MultiItemEntity>? = null
+    private var createSJ: ArrayList<BaseNode>? = null
     private var context: Context = this
     private var isDel = false
 
@@ -41,6 +42,7 @@ class MainActivity : BaseActivity() {
                 check_goods_all.isChecked = checkAllSJs
                 //如果是删除商品状态这不需要计算操作
                 if (isDel) {
+//                  得到要删除的数据的列表
                     delCheckItems = checkItem
                     fkmd.setCenterString("删除(${delCheckItems!!.size})")
                     return

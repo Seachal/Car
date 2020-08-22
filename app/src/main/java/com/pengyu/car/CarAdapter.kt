@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kyleduo.switchbutton.SwitchButton
 
 /**
