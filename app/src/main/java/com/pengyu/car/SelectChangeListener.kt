@@ -9,5 +9,5 @@ import java.util.ArrayList
  */
 
 interface SelectChangeListener {
-    fun goodsChangeS(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean)
+    fun goodsCheckChange(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean)
 }

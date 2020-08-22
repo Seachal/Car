@@ -1,12 +1,11 @@
 package com.pengyu.car.provider
 
 import android.content.Context
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.chad.library.adapter.base.entity.node.BaseNode
+import com.pengyu.car.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbarc.*
 
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.toolbarc.*
 
 class MainActivity2 : BaseActivity() {
 
-    private var carAdapter: CarAdapter? = null
+    private var carAdapter: NodeSectionAdapter? = null
     private var allPrice: Float = 0.0f
     private var goods_xprice: TextView? = null
     private var checkItems: ArrayList<CarEntity.Goods> = ArrayList()
@@ -37,8 +36,8 @@ class MainActivity2 : BaseActivity() {
         bar_title.text = resources.getString(R.string.gwc)
 
         //  selectChangeListener 中发生变化时，回调商品
-        carAdapter = CarAdapter(createSJ!!, object : SelectChangeListener {
-            override fun goodsChangeS(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean) {
+        carAdapter = NodeSectionAdapter( object : SelectChangeListener {
+            override fun goodsCheckChange(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean) {
                 check_goods_all.isChecked = checkAllSJs
                 //如果是删除商品状态这不需要计算操作
                 if (isDel) {
@@ -57,10 +56,11 @@ class MainActivity2 : BaseActivity() {
             }
 
         })
+
+        carAdapter!!.setList(createSJ)
         car_recy.adapter = carAdapter
 
-        //展开商家下面的Item
-        carAdapter!!.expandAll()
+
 
         //全选或反选监听
         check_goods_all.setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -78,19 +78,9 @@ class MainActivity2 : BaseActivity() {
             }
         }
 
-        //Item点击事件监听
-        carAdapter!!.setOnClickListener(object : CarAdapter.ClickItem {
-            override fun clickSJItem(position: Int, carEntity: CarEntity) {
-                Toast.makeText(context, "商家：${carEntity.name}", Toast.LENGTH_SHORT).show()
-            }
 
-            override fun clickGoodsItem(position: Int, goods: CarEntity.Goods) {
-                Toast.makeText(context, "商品：${goods.goodsname}", Toast.LENGTH_SHORT).show()
-            }
 
-        })
-
-        //管理商品事件监听
+        //管理商品事件监听 ,底部点击事件区域
         goods_gl.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 isDel = true

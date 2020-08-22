@@ -38,7 +38,7 @@ class MainActivity : BaseActivity() {
 
         //  selectChangeListener 中发生变化时，回调商品
         carAdapter = CarAdapter(createSJ!!, object : SelectChangeListener {
-            override fun goodsChangeS(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean) {
+            override fun goodsCheckChange(checkItem: ArrayList<CarEntity.Goods>, checkAllSJs: Boolean) {
                 check_goods_all.isChecked = checkAllSJs
                 //如果是删除商品状态这不需要计算操作
                 if (isDel) {
@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
         car_recy.adapter = carAdapter
 
         //展开商家下面的Item
-        carAdapter!!.expandAll()
+//        carAdapter!!.expandAll()
 
         //全选或反选监听
         check_goods_all.setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -81,10 +81,12 @@ class MainActivity : BaseActivity() {
         //Item点击事件监听
         carAdapter!!.setOnClickListener(object : CarAdapter.ClickItem {
             override fun clickSJItem(position: Int, carEntity: CarEntity) {
+//                跳转到商家
                 Toast.makeText(context, "商家：${carEntity.name}", Toast.LENGTH_SHORT).show()
             }
 
             override fun clickGoodsItem(position: Int, goods: CarEntity.Goods) {
+//                  跳转到店铺
                 Toast.makeText(context, "商品：${goods.goodsname}", Toast.LENGTH_SHORT).show()
             }
 

@@ -32,10 +32,10 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
         val TYPE_LEVEL_1 = 1
     }
 
-    init {
-        addItemType(TYPE_LEVEL_0, R.layout.item_car_sj)     //商家布局ID
-        addItemType(TYPE_LEVEL_1, R.layout.item_car_goods)  //商品布局ID
-    }
+//    init {
+//        addItemType(TYPE_LEVEL_0, R.layout.item_car_sj)     //商家布局ID
+//        addItemType(TYPE_LEVEL_1, R.layout.item_car_goods)  //商品布局ID
+//    }
 
     override fun convert(helper: BaseViewHolder, item: BaseNode) {
         when (helper.itemViewType) {
@@ -109,12 +109,16 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
                     override fun change() {
                         goods.goodscoun = number_button.number
                         goods_count.text = "x${goods.goodscoun}"
-                        selectChangeListener.goodsChangeS(getCheckItem(), isCheckAllSJs())
+                        selectChangeListener.goodsCheckChange(getCheckItem(), isCheckAllSJs())
                     }
 
                 })
             }
         }
+    }
+
+    override fun getItemType(data: List<BaseNode>, position: Int): Int {
+        TODO("Not yet implemented")
     }
 
     /**
@@ -157,7 +161,7 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
             }
         }
         notifyDataSetChanged()
-        selectChangeListener.goodsChangeS(getCheckItem(), isCheckAllSJs())
+        selectChangeListener.goodsCheckChange(getCheckItem(), isCheckAllSJs())
     }
 
     /**
@@ -183,7 +187,7 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
                     }
                 }
                 notifyDataSetChanged()
-                selectChangeListener.goodsChangeS(getCheckItem(), isCheckAllSJs())
+                selectChangeListener.goodsCheckChange(getCheckItem(), isCheckAllSJs())
             }
         }
     }
@@ -210,7 +214,7 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
                     isNOCheckAllGoods(goods.orgid)
                 }
                 notifyDataSetChanged()
-                selectChangeListener.goodsChangeS(getCheckItem(), isCheckAllSJs())
+                selectChangeListener.goodsCheckChange(getCheckItem(), isCheckAllSJs())
             }
         }
     }
@@ -312,7 +316,7 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
                     }
                 }
         notifyDataSetChanged()
-        selectChangeListener.goodsChangeS(getCheckItem(), isCheckAllSJs())
+        selectChangeListener.goodsCheckChange(getCheckItem(), isCheckAllSJs())
     }
 
     /**
@@ -336,6 +340,6 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
     fun delete(del: Boolean) {
         isDEL = del
         notifyDataSetChanged()
-        selectChangeListener.goodsChangeS(getCheckItem(), isCheckAllSJs())
+        selectChangeListener.goodsCheckChange(getCheckItem(), isCheckAllSJs())
     }
 }
