@@ -16,7 +16,7 @@ class CarEntity(override var childNode: MutableList<BaseNode>?) : BaseExpandNode
     var yh: YH? = null                       //商家的商品优惠
     var isChecked: Boolean = false
     var isScchecked: Boolean = false
-    var isBjchecked: Boolean = false
+    var isBjchecked: Boolean = false     // 商家编辑按钮是否选中
     var isDelChecked: Boolean = false
 
     var isSjchecked: Boolean = false

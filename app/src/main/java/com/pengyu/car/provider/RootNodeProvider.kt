@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.entity.node.BaseNode
 import com.chad.library.adapter.base.provider.BaseNodeProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kyleduo.switchbutton.SwitchButton
-import com.pengyu.car.CarAdapter
 import com.pengyu.car.CarEntity
 import com.pengyu.car.R
 
@@ -40,6 +39,18 @@ class RootNodeProvider : BaseNodeProvider() {
             check_sj.isChecked = carEntity.isDelChecked
         }
         (getAdapter() as NodeSectionAdapter).checkSJITem(carEntity, check_sj)
+
+        val switch_button = helper.getView<SwitchButton>(R.id.switch_button)
+        switch_button.setOnCheckedChangeListener { buttonView, isChecked ->
+            buttonView.setOnClickListener {
+                carEntity.isBjchecked = isChecked
+                for (subItem in carEntity.childNode!!) {
+                    (subItem as CarEntity.Goods).isChecked = isChecked
+                }
+                (getAdapter() as NodeSectionAdapter).notifyDataSetChanged()
+            }
+        }
+        switch_button.isChecked = carEntity.isBjchecked
 
     }
 

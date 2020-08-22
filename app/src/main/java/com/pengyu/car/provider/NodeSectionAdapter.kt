@@ -4,7 +4,6 @@ import android.widget.CheckBox
 import com.chad.library.adapter.base.BaseNodeAdapter
 import com.chad.library.adapter.base.entity.node.BaseNode
 import com.chad.library.adapter.base.provider.BaseItemProvider
-import com.pengyu.car.CarAdapter
 import com.pengyu.car.CarEntity
 import com.pengyu.car.CarEntity.Goods
 import com.pengyu.car.SelectChangeListener

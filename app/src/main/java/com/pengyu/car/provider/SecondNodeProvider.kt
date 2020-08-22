@@ -49,6 +49,7 @@ class SecondNodeProvider : BaseNodeProvider() {
             check_goods.isChecked = goods.isDelChecked
         }
 
+        (getAdapter() as NodeSectionAdapter).checkGoodsItem(goods, check_goods)
         val number_button = helper.getView<MyNumberButton>(R.id.number_button)
         if (goods.isBjchecked) {
             helper.getView<TextView>(R.id.goods_count).visibility = View.INVISIBLE

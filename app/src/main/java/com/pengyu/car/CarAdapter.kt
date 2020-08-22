@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseNodeAdapter
+import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.entity.node.BaseNode
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.kyleduo.switchbutton.SwitchButton
@@ -42,7 +43,7 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
             TYPE_LEVEL_0 -> {   //商家Item
                 val carEntity = item as CarEntity
                 helper.setText(R.id.sj_name, carEntity.name)
-//               取消了 setchecked 方法 
+//               取消了 setchecked 方法
                 (helper.getView<AppCompatCheckBox>(R.id.check_sj)).setChecked(carEntity.isChecked)
                 val check_sj = helper.getView<CheckBox>(R.id.check_sj)
                 if (!isDEL) {
@@ -115,10 +116,6 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
                 })
             }
         }
-    }
-
-    override fun getItemType(data: List<BaseNode>, position: Int): Int {
-        TODO("Not yet implemented")
     }
 
     /**
