@@ -42,7 +42,7 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
             TYPE_LEVEL_0 -> {   //商家Item
                 val carEntity = item as CarEntity
                 helper.setText(R.id.sj_name, carEntity.name)
-//               取消了 setchecked 方法
+//               取消了 setchecked 方法 
                 (helper.getView<AppCompatCheckBox>(R.id.check_sj)).setChecked(carEntity.isChecked)
                 val check_sj = helper.getView<CheckBox>(R.id.check_sj)
                 if (!isDEL) {
@@ -328,7 +328,6 @@ class CarAdapter(data: ArrayList<BaseNode>, private val selectChangeListener: Se
     fun setOnClickListener(clickItem: ClickItem) {
         this.clickItem = clickItem
     }
-
 
 
     /**

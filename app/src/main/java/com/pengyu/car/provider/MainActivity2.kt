@@ -1,4 +1,4 @@
-package com.pengyu.car
+package com.pengyu.car.provider
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.toolbarc.*
  * Created by PengYu on 2017/10/18.
  */
 
-class MainActivity : BaseActivity() {
+class MainActivity2 : BaseActivity() {
 
     private var carAdapter: CarAdapter? = null
     private var allPrice: Float = 0.0f
@@ -109,9 +109,3 @@ class MainActivity : BaseActivity() {
     override fun initData() {
     }
 }
-
-/**
- * 难点，
- *    界面的删除标识怎样传递到 provider,
- *    界面 item  的点击事件回调 怎样传递到 provider，。
- */

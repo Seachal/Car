@@ -26,5 +26,8 @@ class NodeSectionAdapter : BaseNodeAdapter() {
         addFullSpanNodeProvider(RootNodeProvider())
         //         添加 node provider
         addNodeProvider(SecondNodeProvider())
+
     }
+
+
 }
